@@ -2,7 +2,6 @@ from flask import Flask, request, send_from_directory
 import os
 
 app = Flask(__name__)
-x = 1
 
 # กำหนดโฟลเดอร์ที่ใช้เก็บรูปภาพ
 UPLOAD_FOLDER = 'uploads'
