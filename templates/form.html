@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ฟอร์มกรอกข้อมูล</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Upload Form</title>
 </head>
 <body>
-    <h1>ฟอร์มกรอกข้อมูล</h1>
-    <form action="/submit" method="post" enctype="multipart/form-data">
+    <h1>กรอกข้อมูลและอัปโหลดรูปภาพ</h1>
+    <form action="/submit" method="POST" enctype="multipart/form-data">
         <label for="name">ชื่อ:</label>
         <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="workplace">ที่ทำงาน:</label>
+
+        <label for="workplace">สถานที่ทำงาน:</label>
         <input type="text" id="workplace" name="workplace" required><br><br>
-        
-        <label for="other_info">ข้อมูลอื่น ๆ:</label>
-        <textarea id="other_info" name="other_info" rows="4"></textarea><br><br>
-        
-        <label for="photo">รูปภาพ:</label>
+
+        <label for="other_info">ข้อมูลเพิ่มเติม:</label>
+        <input type="text" id="other_info" name="other_info"><br><br>
+
+        <label for="photo">อัปโหลดรูปภาพ:</label>
         <input type="file" id="photo" name="photo" accept="image/*" required><br><br>
-        
-        <button type="submit">ส่งข้อมูล</button>
+
+        <input type="submit" value="ส่งข้อมูล">
     </form>
 </body>
 </html>
