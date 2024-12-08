@@ -5,7 +5,6 @@
         .image-container {
             width: 1024px;
             height: 512px;
-            border: 5px solid black;
             position: relative;
             margin: auto;
             display: flex;
@@ -15,12 +14,43 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            border-radius: 40px; /* กำหนดมุมโค้ง */
+            overflow: hidden; /* ซ่อนส่วนที่เกินออกมาจากขอบโค้ง */
         }
         .uploaded-image {
             max-width: 150px;
             max-height: 100%;
+            border: 2px solid #000; /* ขอบสีดำ */
             object-fit: contain;
-            margin-left: 10px;
+            margin-left: 20px;
+            margin-top: 80px;
+        }
+        .name-overlay {
+            position: absolute;
+            margin-top: 100px; 
+            margin-left: 250px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #333;
+        }
+        .workplace {
+            position: absolute;
+            margin-top: 10px; 
+            margin-left: 80px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .rectangle {
+            width: 750px; /* ความกว้าง */
+            height: 400px; /* ความสูง */
+            background-color: rgba(255, 255, 255, 0.8); /* สีพื้นหลังขาวพร้อมโปร่งใส 80% */
+            border: 2px solid #000; /* ขอบสีดำ */
+            border-radius: 20px; /* มุมโค้ง */
+            margin: auto; /* จัดให้อยู่ตรงกลางของหน้า */
+            margin-top: 70px; /* ระยะห่างด้านบน */
+            margin-right: 50px;
         }
     </style>
 </head>
@@ -28,6 +58,9 @@
     <h1>ข้อมูลที่บันทึกแล้ว</h1>
     <div class="image-container">
         <img src="{{ photo_url }}" alt="Uploaded Image" class="uploaded-image">
+        <div class="name-overlay">{{ name }}</div>
+        <div class="workplace">{{ workplace }}</div>
+        <div class="rectangle"></div>
     </div>
     
     <p><a href="/">กลับไปหน้าฟอร์ม</a></p>
