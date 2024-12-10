@@ -18,28 +18,94 @@
             overflow: hidden; /* ซ่อนส่วนที่เกินออกมาจากขอบโค้ง */
         }
         .uploaded-image {
-            max-width: 150px;
+            max-width: 170px;
             max-height: 100%;
             border: 2px solid #000; /* ขอบสีดำ */
             object-fit: contain;
             margin-left: 20px;
             margin-top: 80px;
         }
+        .Line {
+            max-width: 170px;
+            max-height: 100%;
+            border: 2px solid #000; /* ขอบสีดำ */
+            object-fit: contain;
+            position: absolute;
+            margin-left: 700px;
+            margin-top: 280px;
+        }
         .name-overlay {
             position: absolute;
             margin-top: 100px; 
             margin-left: 250px;
-            font-size: 30px;
+            font-size:40px;
             font-weight: bold;
             color: #333;
+            font-family: 'Algerian', sans-serif; /* เปลี่ยนฟอนต์ที่ต้องการ */
+        }
+        .address::before {
+            content: "address : ";
+            font-size: 25px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Algerian', sans-serif; /* เปลี่ยนฟอนต์ที่ต้องการ */
+        }
+        .address {
+            position: absolute;
+            margin-top: 200px; 
+            margin-left: 250px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Algerian', sans-serif; /* เปลี่ยนฟอนต์ที่ต้องการ */
+        }
+        .workplace::before {
+            content: "workplace : ";
+            font-size: 25px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Algerian', sans-serif; /* เปลี่ยนฟอนต์ที่ต้องการ */
         }
         .workplace {
             position: absolute;
-            margin-top: 10px; 
-            margin-left: 80px;
-            font-size: 40px;
+            margin-top: 250px; 
+            margin-left: 250px;
+            font-size: 20px;
             font-weight: bold;
             color: #333;
+            font-family: 'Algerian', sans-serif; /* เปลี่ยนฟอนต์ที่ต้องการ */ 
+        }
+        .gmail::before {
+            content: "gmail : ";
+            font-size: 25px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Algerian', sans-serif; /* เปลี่ยนฟอนต์ที่ต้องการ */
+        }
+        .gmail {
+            position: absolute;
+            margin-top: 300px; 
+            margin-left: 250px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Algerian', sans-serif; /* เปลี่ยนฟอนต์ที่ต้องการ */
+        }
+        .phone::before {
+            content: "phone : ";
+            font-size: 25px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Algerian', sans-serif; /* เปลี่ยนฟอนต์ที่ต้องการ */
+        }
+        .phone {
+            position: absolute;
+            margin-top: 350px; 
+            margin-left: 250px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            font-family: 'Algerian', sans-serif; /* เปลี่ยนฟอนต์ที่ต้องการ */     
         }
 
         .rectangle {
@@ -58,8 +124,13 @@
     <h1>ข้อมูลที่บันทึกแล้ว</h1>
     <div class="image-container">
         <img src="{{ photo_url }}" alt="Uploaded Image" class="uploaded-image">
+        <img src="{{ Line_url }}" alt="Uploaded Image" class="Line">
         <div class="name-overlay">{{ name }}</div>
         <div class="workplace">{{ workplace }}</div>
+        <div class="gmail">{{ gmail }}</div>
+        <div class="phone">{{ phone }}</div>
+        <div class="address">{{ address }}</div>
+        <div class="Line-text"></div>
         <div class="rectangle"></div>
     </div>
     
