@@ -41,24 +41,18 @@ def submit():
         return "กรุณาอัปโหลดรูปภาพ"
 
     # สร้างภาพใหม่โดยใช้ PixArtAlphaPipeline
-    pipe = PixArtAlphaPipeline.from_pretrained("PixArt-alpha/PixArt-LCM-XL-2-1024-MS", use_safetensors=True)
-    pipe.scheduler.set_timesteps(2)  # Adjust timesteps for faster image generation (optional)
-    prompt = request.form['prompt']
-    generator = torch.Generator().manual_seed(42)
+    #pipe = PixArtAlphaPipeline.from_pretrained("PixArt-alpha/PixArt-LCM-XL-2-1024-MS", use_safetensors=True)
+    #pipe.scheduler.set_timesteps(42)  # Adjust timesteps for faster image generation (optional)
+    #prompt = request.form['prompt']
+    #generator = torch.Generator().manual_seed(42)
 
     
-    generated_image = pipe(prompt, guidance_scale=0.0, num_inference_steps=4, generator=generator,height=512 , width=1024).images[0]
-    #ปรับภาพ สี่เหลี่ยม
-    #rectangular_image = generated_image.resize((1024, 512))
-  
- 
-   
-   
-    
+    #generated_image = pipe(prompt, guidance_scale=0.0, num_inference_steps=4, generator=generator,height=512 , width=1024).images[0]
+
     # สร้างชื่อไฟล์สำหรับภาพที่สร้าง
     generated_image_filename = "generated_image.png"
     generated_image_path = os.path.join(app.config['UPLOAD_FOLDER'], generated_image_filename)
-    generated_image.save(generated_image_path)
+    #generated_image.save(generated_image_path)
 
     # สร้าง URL สำหรับภาพที่สร้าง
     generated_image_url = url_for('uploaded_file', filename=generated_image_filename)
