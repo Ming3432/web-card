@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_result.css') }}">
+    <title>Screenshot and Data Display</title>
     <style>
+        /* สไตล์สำหรับส่วนแสดงข้อมูล */
         .image-container {
             width: 1024px;
             height: 512px;
@@ -118,11 +123,19 @@
             margin-top: 70px; /* ระยะห่างด้านบน */
             margin-right: 50px;
         }
+        button {
+            margin: 20px auto;
+            display: block;
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <h1>ข้อมูลที่บันทึกแล้ว</h1>
-    <div class="image-container">
+    <div class="image-container" id="capture-area">
         <img src="{{ photo_url }}" alt="Uploaded Image" class="uploaded-image">
         <img src="{{ Line_url }}" alt="Uploaded Image" class="Line">
         <div class="name-overlay">{{ name }}</div>
@@ -133,7 +146,78 @@
         <div class="Line-text"></div>
         <div class="rectangle"></div>
     </div>
-    
+    <div class="container">
+        <div class="bubbles">
+            <span style="--i:13;"></span>
+            <span style="--i:14;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:15;"></span>
+            <span style="--i:26;"></span>
+            <span style="--i:20;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:21;"></span>
+            <span style="--i:29;"></span>
+            <span style="--i:17;"></span>
+            <span style="--i:25;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:24;"></span>
+            <span style="--i:27;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:31;"></span>
+            <span style="--i:22.5;"></span>
+            <span style="--i:24.6;"></span>
+            <span style="--i:21.7;"></span>
+            <span style="--i:28.4;"></span>
+            <span style="--i:20.6;"></span>
+            <span style="--i:13;"></span>
+            <span style="--i:14;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:15;"></span>
+            <span style="--i:26;"></span>
+            <span style="--i:20;"></span>
+            <span style="--i:29;"></span>
+            <span style="--i:17;"></span>
+            <span style="--i:25;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:24;"></span>
+            <span style="--i:27;"></span>
+            <span style="--i:21.7;"></span>
+            <span style="--i:28.4;"></span>
+            <span style="--i:20.6;"></span>
+            <span style="--i:13;"></span>
+            <span style="--i:14;"></span>
+            <span style="--i:12;"></span>
+
     <p><a href="/">กลับไปหน้าฟอร์ม</a></p>
+
+    <button id="capture-btn">แคปหน้าจอ</button>
+    <div id="result"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('capture-btn').addEventListener('click', () => {
+            const captureArea = document.getElementById('capture-area');
+            html2canvas(captureArea)
+                .then(canvas => {
+                    // แสดงภาพที่แคปได้
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = ''; // ล้างผลลัพธ์เก่า
+                    resultDiv.appendChild(canvas);
+
+                    // ดาวน์โหลดรูปภาพ
+                    const link = document.createElement('a');
+                    link.download = 'screenshot.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                })
+                .catch(err => {
+                    console.error('Error capturing screenshot:', err);
+                });
+        });
+    </script>
 </body>
 </html>
