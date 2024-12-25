@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_result.css') }}">
     <title>WEB Crad</title>
-    <h1>การ์ดที่สร้างเสร็จแล้ว</h1>
+    
     <style>
     /* สไตล์สำหรับส่วนแสดงข้อมูล */
         .image-container {
@@ -21,8 +21,10 @@
             background-repeat: no-repeat;
             background-position: center;
             background-color: rgba(255, 255, 255, 0.8);
+            margin-top: 100px;
             border-radius: 40px; /* กำหนดมุมโค้ง */
             overflow: hidden; /* ซ่อนส่วนที่เกินออกมาจากขอบโค้ง */
+            z-index: 999999;
         }
         .uploaded-image {
             max-width: 170px;
@@ -127,12 +129,15 @@
         }
         button {
             position: absolute; /* กำหนดตำแหน่งแบบ absolute */
-            top: 150%; /* จัดตำแหน่งแนวตั้งให้อยู่กึ่งกลาง */
-            left: 50%; /* จัดตำแหน่งแนวนอนให้อยู่กึ่งกลาง */
+            top: 2000%; /* จัดตำแหน่งแนวตั้งให้อยู่กึ่งกลาง */
+            left: 90%; /* จัดตำแหน่งแนวนอนให้อยู่กึ่งกลาง */
             transform: translate(-50%, -50%); /* ปรับการเลื่อนเพื่อให้อยู่ตรงกลางจริง ๆ */
             font-size: 20px; /* เพิ่มขนาดข้อความ */
             padding: 15px 30px; /* เพิ่มพื้นที่ภายในปุ่ม */
             background-color: #007BFF; /* เปลี่ยนสีพื้นหลัง */
+            box-shadow: 0 0 0 0px #007BFF,
+                0 0 50px #007BFF,
+                0 0 100px #007BFF;
             color: #FFFFFF; /* เปลี่ยนสีข้อความ */
             border: none; /* ลบขอบ */
             border-radius: 10px; /* มุมโค้ง */
@@ -151,12 +156,15 @@
         }
         .back-button {
             position: absolute; /* กำหนดตำแหน่งแบบ absolute */
-            top: 150%; /* จัดตำแหน่งแนวตั้งให้อยู่กึ่งกลาง */
-            left: 10%; /* จัดตำแหน่งแนวนอนให้อยู่กึ่งกลาง */
+            top: 1930%; /* จัดตำแหน่งแนวตั้งให้อยู่กึ่งกลาง */
+            left: 5%; /* จัดตำแหน่งแนวนอนให้อยู่กึ่งกลาง */
             display: inline-block;
             font-size: 20px; /* ขนาดตัวอักษร */
             padding: 10px 20px; /* ขนาดภายในปุ่ม */
             background-color: #28a745; /* สีพื้นหลัง */
+            box-shadow: 0 0 0 0px #28a745,
+                0 0 50px #28a745,
+                0 0 100px #28a745;
             color: #ffffff; /* สีตัวอักษร */
             text-align: center; /* จัดข้อความให้อยู่กลาง */
             text-decoration: none; /* ลบเส้นใต้ (สำหรับแท็ก <a>) */
@@ -239,6 +247,15 @@
             <span style="--i:13;"></span>
             <span style="--i:14;"></span>
             <span style="--i:12;"></span>
+            <span style="--i:13;"></span>
+            <span style="--i:14;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:27;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:31;"></span>
+            <span style="--i:22.5;"></span>
 
     
     
@@ -283,18 +300,20 @@
 
                 // เปิดหน้าใหม่แสดงผล
                 const newWindow = window.open('', '_blank');
-                newWindow.document.write(`
-                    <html>
-                        <head><title>ผลลัพธ์การแคปหน้าจอ</title></head>
-                        <body style="text-align: center; margin-top: 50px;">
-                            <h1>เสร็จสิ้น</h1>
-                            <p>นี่คือนามบัตรของคุณ:</p>
-                            <div>
-                                <img src="${roundedCanvas.toDataURL('image/png')}" style="border-radius: 40px; border: 2px solid #000;">
-                            </div>
-                        </body>
-                    </html>
-                `);
+                    newWindow.document.write(`
+                        <html>
+                            <head><title>ผลลัพธ์การแคปหน้าจอ</title></head>
+                            <body style="text-align: center; margin-top: 50px; background-color: #f0f0f0;">
+                                <h1>เสร็จสิ้น</h1>
+                                <p>นี่คือนามบัตรของคุณ:</p>
+                                <div>
+                                    <img src="${roundedCanvas.toDataURL('image/png')}" style="border-radius: 40px; border: 2px solid #000;">
+                                </div>
+                            </body>
+                        </html>
+                    `);
+
+
 
                 // เปลี่ยนข้อความในหน้าเว็บหลัก
                 document.body.innerHTML = `
