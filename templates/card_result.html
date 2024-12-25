@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style_result.css') }}">
-    <title>Screenshot and Data Display</title>
+    <title>WEB Crad</title>
+    <h1>การ์ดที่สร้างเสร็จแล้ว</h1>
     <style>
-        /* สไตล์สำหรับส่วนแสดงข้อมูล */
+    /* สไตล์สำหรับส่วนแสดงข้อมูล */
         .image-container {
             width: 1024px;
             height: 512px;
@@ -19,6 +20,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 40px; /* กำหนดมุมโค้ง */
             overflow: hidden; /* ซ่อนส่วนที่เกินออกมาจากขอบโค้ง */
         }
@@ -124,17 +126,63 @@
             margin-right: 50px;
         }
         button {
-            margin: 20px auto;
-            display: block;
+            position: absolute; /* กำหนดตำแหน่งแบบ absolute */
+            top: 150%; /* จัดตำแหน่งแนวตั้งให้อยู่กึ่งกลาง */
+            left: 50%; /* จัดตำแหน่งแนวนอนให้อยู่กึ่งกลาง */
+            transform: translate(-50%, -50%); /* ปรับการเลื่อนเพื่อให้อยู่ตรงกลางจริง ๆ */
+            font-size: 20px; /* เพิ่มขนาดข้อความ */
+            padding: 15px 30px; /* เพิ่มพื้นที่ภายในปุ่ม */
+            background-color: #007BFF; /* เปลี่ยนสีพื้นหลัง */
+            color: #FFFFFF; /* เปลี่ยนสีข้อความ */
+            border: none; /* ลบขอบ */
+            border-radius: 10px; /* มุมโค้ง */
+            cursor: pointer; /* เปลี่ยนตัวชี้เมาส์ */
+            transition: background-color 0.3s; /* เพิ่มเอฟเฟกต์เมื่อโฮเวอร์ */
         }
+
+        button:hover {
+            background-color: #0056b3; /* เปลี่ยนสีพื้นหลังเมื่อโฮเวอร์ */
+        }
+
+
         #result {
             margin-top: 20px;
             text-align: center;
         }
+        .back-button {
+            position: absolute; /* กำหนดตำแหน่งแบบ absolute */
+            top: 150%; /* จัดตำแหน่งแนวตั้งให้อยู่กึ่งกลาง */
+            left: 10%; /* จัดตำแหน่งแนวนอนให้อยู่กึ่งกลาง */
+            display: inline-block;
+            font-size: 20px; /* ขนาดตัวอักษร */
+            padding: 10px 20px; /* ขนาดภายในปุ่ม */
+            background-color: #28a745; /* สีพื้นหลัง */
+            color: #ffffff; /* สีตัวอักษร */
+            text-align: center; /* จัดข้อความให้อยู่กลาง */
+            text-decoration: none; /* ลบเส้นใต้ (สำหรับแท็ก <a>) */
+            border: none; /* ลบขอบ */
+            border-radius: 8px; /* มุมโค้ง */
+            cursor: pointer; /* เปลี่ยนตัวชี้เมาส์ */
+            transition: background-color 0.3s; /* เอฟเฟกต์เวลาโฮเวอร์ */
+        }
+
+        .back-button:hover {
+            background-color: #218838; /* เปลี่ยนสีพื้นหลังเมื่อโฮเวอร์ */
+        }
+        /*ขอบคุณที่ใช้งาน*/
+        h5 {
+            font-size: 3em; /* ขนาดตัวอักษรใหญ่ */
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5em; /* ขนาดตัวอักษรรอง */
+        }
+
     </style>
 </head>
 <body>
-    <h1>ข้อมูลที่บันทึกแล้ว</h1>
+                                        
     <div class="image-container" id="capture-area">
         <img src="{{ photo_url }}" alt="Uploaded Image" class="uploaded-image">
         <img src="{{ Line_url }}" alt="Uploaded Image" class="Line">
@@ -192,31 +240,72 @@
             <span style="--i:14;"></span>
             <span style="--i:12;"></span>
 
-    <p><a href="/">กลับไปหน้าฟอร์ม</a></p>
+    
+    
+<a href="/" class="back-button">กลับไปหน้าฟอร์ม</a>
+<button id="capture-btn">บันทึก</button>
 
-    <button id="capture-btn">แคปหน้าจอ</button>
     <div id="result"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script>
         document.getElementById('capture-btn').addEventListener('click', () => {
             const captureArea = document.getElementById('capture-area');
-            html2canvas(captureArea)
-                .then(canvas => {
-                    // แสดงภาพที่แคปได้
-                    const resultDiv = document.getElementById('result');
-                    resultDiv.innerHTML = ''; // ล้างผลลัพธ์เก่า
-                    resultDiv.appendChild(canvas);
+            html2canvas(captureArea, { backgroundColor: null }).then(canvas => {
+                // สร้าง Canvas ใหม่พร้อมมุมโค้ง
+                const radius = 40; // เปลี่ยนเป็นมุมโค้ง 40px
+                const roundedCanvas = document.createElement('canvas');
+                roundedCanvas.width = canvas.width;
+                roundedCanvas.height = canvas.height;
 
-                    // ดาวน์โหลดรูปภาพ
-                    const link = document.createElement('a');
-                    link.download = 'screenshot.png';
-                    link.href = canvas.toDataURL('image/png');
-                    link.click();
-                })
-                .catch(err => {
-                    console.error('Error capturing screenshot:', err);
-                });
+                const ctx = roundedCanvas.getContext('2d');
+                ctx.beginPath();
+                ctx.moveTo(radius, 0);
+                ctx.lineTo(canvas.width - radius, 0);
+                ctx.quadraticCurveTo(canvas.width, 0, canvas.width, radius);
+                ctx.lineTo(canvas.width, canvas.height - radius);
+                ctx.quadraticCurveTo(canvas.width, canvas.height, canvas.width - radius, canvas.height);
+                ctx.lineTo(radius, canvas.height);
+                ctx.quadraticCurveTo(0, canvas.height, 0, canvas.height - radius);
+                ctx.lineTo(0, radius);
+                ctx.quadraticCurveTo(0, 0, radius, 0);
+                ctx.closePath();
+                ctx.clip();
+
+                // วาดภาพลงใน Canvas ที่มีมุมโค้ง
+                ctx.drawImage(canvas, 0, 0);
+
+                // สร้างลิงก์ดาวน์โหลด
+                const link = document.createElement('a');
+                link.href = roundedCanvas.toDataURL('image/png');
+                link.download = 'screenshot.png'; // ตั้งชื่อไฟล์
+                link.click(); // เปิดดาวน์โหลดทันที
+
+                // เปิดหน้าใหม่แสดงผล
+                const newWindow = window.open('', '_blank');
+                newWindow.document.write(`
+                    <html>
+                        <head><title>ผลลัพธ์การแคปหน้าจอ</title></head>
+                        <body style="text-align: center; margin-top: 50px;">
+                            <h1>เสร็จสิ้น</h1>
+                            <p>นี่คือนามบัตรของคุณ:</p>
+                            <div>
+                                <img src="${roundedCanvas.toDataURL('image/png')}" style="border-radius: 40px; border: 2px solid #000;">
+                            </div>
+                        </body>
+                    </html>
+                `);
+
+                // เปลี่ยนข้อความในหน้าเว็บหลัก
+                document.body.innerHTML = `
+                    <div style="text-align: center; margin-top: 100px;">
+                        <h1 style="text-transform: uppercase; font-size: 48px; color: white;">ขอบคุณที่ใช้งาน</h1>
+                        <p style="text-transform: uppercase; font-size: 36px; color: white;">การแคปหน้าจอเสร็จสมบูรณ์แล้ว!</p>
+                    </div>
+                `;
+
+
+            });
         });
     </script>
 </body>

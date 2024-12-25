@@ -1,20 +1,18 @@
-button{
-    margin-top: 1000 ;
-}
-body{
-    background-color: #1C1C1C;
-}
 
+body {
+    background-image: url('365661.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+h1{
+    color: white;
+}
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body {
-    min-height: 100vh;
-    background: #0c192c;
-}
-
 .container {
     position: relative;
     width: 100%;
